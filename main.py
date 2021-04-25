@@ -42,6 +42,57 @@ def decrypt(decrypt_text, plain_shift):
         
     return print(f'The decoded text is {cipher_text}')
                 
+def caesar(encrypt_text = None, decrypt_text = None, plain_shift = 5):
+    
+    cipher_text = ''   
+    
+    if decrypt_text == None:
+        for letter in encrypt_text:
+            letter_ID = alphabet.index(letter)
+            shiften_letter_ID = letter_ID + plain_shift
+    
+            if shiften_letter_ID > 25:
+                shiften_letter_ID -= 26
+    
+            cipher_text += alphabet[shiften_letter_ID]
+    
+        return print(f'The encoded text is {cipher_text}')    
+       
+    elif encrypt_text == None:
+        for letter in decrypt_text:
+            letter_ID = alphabet.index(letter)
+            shiften_letter_ID = letter_ID - plain_shift
+    
+            if shiften_letter_ID < 0:
+                shiften_letter_ID += 26
+            
+            cipher_text += alphabet[shiften_letter_ID]
+    
+        return print(f'The decoded text is {cipher_text}')
+     
+     
+def caesar_2(start_text, plain_shift, direction):
+    cipher_text = ''
+    for letter in start_text:
+        letter_ID = alphabet.index(letter)
+        
+        if direction == 'encode':
+            shiften_letter_ID = letter_ID + plain_shift
+            if shiften_letter_ID > 25:
+                shiften_letter_ID -= 26    
+         
+        elif direction =='decode':
+            shiften_letter_ID = letter_ID - plain_shift
+            if shiften_letter_ID < 0:
+                shiften_letter_ID += 26
+        
+        cipher_text += alphabet[shiften_letter_ID]
+        
+    if direction == 'encode':
+        return print(f'The encoded text is {cipher_text}') 
+    else:
+        return print(f'The decoded text is {cipher_text}')
+     
 while True:
     
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt, or 'q' to quit:\n")
@@ -51,14 +102,11 @@ while True:
     text = input("Type your message:\n").lower()
     shift = int(input("Type the shift number:\n"))
     
-    if direction == 'encode':
-        encrypt(text,shift)
-        
-    elif direction == 'decode':
-        decrypt(text,shift)
-
-
+    caesar_2(text,shift,direction)
     
+
+
+
 
 #TODO-1: Create a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
 
